@@ -43,6 +43,7 @@ Algorithm:
 Iterate over the array.
 Update farthest = max(farthest, i + nums[i]).
 If we reach currentEnd, it means we must “jump” → increment jumps and update currentEnd = farthest.
+Stop when we reach the last index.
 ------------------------------------------------------------------------------
 
-Stop when we reach the last index.
+
