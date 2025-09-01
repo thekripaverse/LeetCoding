@@ -1,0 +1,48 @@
+Jump Game I (55): Can I reach? → yes/no (boolean).
+Jump Game II (45): Minimum steps to reach. → integer.
+
+---------------------------------------------------------------------------
+class Solution(object):
+    def jump(self, nums):
+        jumps = 0
+        currentEnd = 0
+        farthest = 0
+        
+        for i in range(len(nums) - 1):  # No need to check last index
+            farthest = max(farthest, i + nums[i])
+            if i == currentEnd:   # We’ve used up the current jump
+                jumps += 1
+                currentEnd = farthest
+        
+        return jumps
+
+---------------------------------------------------------------------------
+1. Problem Explanation
+
+We are given an array nums where:
+Each number represents the maximum jump length at that index.
+Starting from index 0, we need to find the minimum number of jumps to reach the last index.
+The guarantee: It’s always possible to reach the end.
+We want the smallest number of jumps to go from nums[0] → nums[n-1].
+
+2.Concept
+
+This is again a Greedy Problem but a little trickier.
+Think of it as levels of BFS traversal:
+Every jump is like moving one “level” forward.
+We expand the farthest we can reach in the current jump, and once we exhaust that range, we increase the jump count.
+
+Key Idea:
+
+Track two variables:
+currentEnd → the farthest we can go in the current jump.
+farthest → the farthest we can reach overall.
+
+Algorithm:
+
+Iterate over the array.
+Update farthest = max(farthest, i + nums[i]).
+If we reach currentEnd, it means we must “jump” → increment jumps and update currentEnd = farthest.
+------------------------------------------------------------------------------
+
+Stop when we reach the last index.
